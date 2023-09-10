@@ -29,3 +29,11 @@ function operate(num1, op, num2) {
         divide(num1, num2)
     }
 }
+
+let container = document.getElementById('calcScreen');
+let calcNum = document.createElement('div'); 
+container.appendChild(calcNum);
+
+function addNumber(number) {
+    calcNum.textContent += number;
+}

@@ -10,21 +10,19 @@
 <body>
 <div class = calculator>
     <div class = calcBody>
-        <div class = calcScreen>
-            <div class="screen"></div>
-        </div>
+        <div id = calcScreen>   </div>
 
         <div class = "deleteButtons">
-            <button class="buttons">Clear</button>
+            <button class="buttons" onclick="clearAll()">Clear</button>
             <button class="buttons">Delete</button>
 
         </div>
 
         <div class = "row1">
-            <button class="buttons">7</button>
-            <button class="buttons">8</button>
-            <button class="buttons">9</button>
-            <button class="buttons">/</button>
+            <button class="buttons" onclick="addNumber('7')">7</button>
+            <button class="buttons" onclick="addNumber('8')">8</button>
+            <button class="buttons" onclick="addNumber('9')">9</button>
+            <button class="buttons" onclick="addNumber('/')">/</button>
         </div>
 
         <div class = "row2">

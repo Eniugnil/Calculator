@@ -25,7 +25,7 @@ body {
     width: auto;
 }
 
-.calcScreen {
+#calcScreen {
     background-color: white;
     height: 40px
 }
