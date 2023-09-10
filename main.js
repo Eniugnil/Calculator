@@ -37,3 +37,7 @@ container.appendChild(calcNum);
 function addNumber(number) {
     calcNum.textContent += number;
 }
+
+function clearAll() {
+    calcNum.textContent = " ";
+}
