@@ -41,3 +41,11 @@ function addNumber(number) {
 function clearAll() {
     calcNum.textContent = " ";
 }
+
+function deleteOne() {
+    let currentText = calcNum.textContent;
+    if (currentText.length > 0) {
+        let newText = currentText.slice(0, -1);
+        calcNum.textContent = newText;
+    }
+}
