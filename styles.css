@@ -12,14 +12,26 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: black;
 }
 
 
-.calcButtons {
+.calcBody {
     border: 1px solid blue;
     background-color: gray;
     display: flex;
     flex-direction: column;
+    height:auto;
+    width: auto;
+}
+
+.calcScreen {
+    background-color: white;
+    height: 40px
+}
+
+.deleteButtons {
+    padding: 5px 10px;
 }
 
 .row1 {
