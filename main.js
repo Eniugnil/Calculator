@@ -17,7 +17,7 @@ function divide(a, b) {
 let numberOne;
 let operator;
 let numberTwo;
-let answeree = 1;
+let answeree;
 
 function operate(num1, op, num2) {
     let total;
@@ -60,7 +60,7 @@ function addNumber(number) {
     }
     
     if (numberOne) {
-        if (numberOne.length >= 1) {
+        if (numberOne.length >= 1 || numberOne === answeree) {
             numTwo(number)
         }
     }
@@ -110,25 +110,34 @@ function operateTest(mathOperator) {
     if (mathOperator === "+") {
         answeree = add(numberOne, numberTwo);
         numberOne = answeree;
-        containerOne.textContent = answeree;
+        calcNumOne.textContent = answeree;   //this is the text content and not the actual variable storing the information
+        calcNumTwo.textContent = "";
+        numberTwo = "";
+        answeree = "";
+
     }
 
     if (mathOperator === "-") {
         answeree = subtract(numberOne, numberTwo);
         numberOne = answeree;
-        containerOne.textContent = answeree;
+        calcNumOne.textContent = answeree;
+        calcNumTwo.textContent = "";
+
     }
 
     if (mathOperator === "*") {
         answeree = multiply(numberOne, numberTwo);
         numberOne = answeree;
-        containerOne.textContent = answeree;
+        calcNumOne.textContent = answeree;
+        calcNumTwo.textContent = "";
+
     }
 
     if (mathOperator === "/") {
         answeree = divide(numberOne, numberTwo);
         numberOne = answeree;
-        containerOne.textContent = answeree;
+        calcNumOne.textContent = answeree;
+        calcNumTwo.textContent = "";
     }
 
     if (mathOperator === "=") {
@@ -168,11 +177,19 @@ function operateTest(mathOperator) {
         // mathOperator === "/" 
 
     
-//The clear button breaks the calculator after clicked. Numbers can't be inputted
-// function clearAll() {
-//     calcNumOne.textContent = "";
-//     calcNumTwo.textContent = "";
-// }
+function clearAll() {
+
+    //this is the text content and not the actual variable storing the information
+    calcNumOne.textContent = "";
+    calcNumTwo.textContent = "";
+    calcNumAns.textContent = "";
+
+    //this is the actual variable storing the information for the calculator
+    numberOne = "";
+    operator = "";
+    numberTwo = "";
+    answeree = "";
+}
 
 //delete button is currently not working
 // function deleteOne() {
