@@ -14,38 +14,94 @@ function divide(a, b) {
     return a / b;
 }
 
-let number1
-let operator
-let number2 
+let numberOne;
+let operator;
+let numberTwo;
 
 function operate(num1, op, num2) {
+    let total;
     if (op === "+") {
-        add(num1, num2)
+        total = add(num1, num2)
+        return total
     } else if (op === "-") {
-        subtract(num1, num2)
+        total = subtract(num1, num2)
+        return total
     } else if (op === "*") {
-        multiply(num1, num2)
+        total = multiply(num1, num2)
+        return total
     } else if (op === "/") {
-        divide(num1, num2)
+        total = divide(num1, num2)
+        return total
     }
 }
 
-let container = document.getElementById('calcScreen');
-let calcNum = document.createElement('div'); 
-container.appendChild(calcNum);
+let containerOne = document.getElementById('calcScreen');
+let calcNumOne = document.createElement('div'); 
+containerOne.appendChild(calcNumOne);
+
+
+let containerTwo = document.getElementById('calcScreen');
+let calcNumTwo = document.createElement('div'); 
+containerTwo.appendChild(calcNumTwo);
 
 function addNumber(number) {
-    calcNum.textContent += number;
+    if (!numberOne) {
+    calcNumOne.textContent += number;
+    }
+    
+    if (numberOne) {
+        if (numberOne.length > 1) {
+            numTwoTesting(number)
+        }
+    }
+    if (!numberOne) {
+        if (number === "+" || number === "-" || number === "*" || number === "/") {
+            numberOne = calcNumOne.textContent;
+            console.log(numberOne + "one");
+            }
+    }
 }
 
+function numTwoTesting(number) {
+        calcNumTwo.textContent += number;
+        if (number === "+" || number === "-" || number === "*" || number === "/") {
+        numberTwo = calcNumTwo.textContent;
+        console.log(numberTwo + "two");
+        }
+    }
+
+
+    
+
+
+
+    // if (numberOne) {
+    //   if (numberOne.length > 1) {
+    //     calcNumTwo.textContent += number;
+    //     numberTwo = calcNumTwo.textContent;
+    //     console.log(numberTwo + " two");
+    //   }
+    // }
+  
+    
+
+    // if (numberOne && numberTwo) {
+    //     if (number === "=") {
+    //         console.log("hello")
+    //     }
+    
+    // }
+
+
+//delete buttons are non working properly
 function clearAll() {
-    calcNum.textContent = " ";
+    calcNumOne.textContent = "";
 }
 
 function deleteOne() {
-    let currentText = calcNum.textContent;
+    let currentText = calcNumOne.textContent;
     if (currentText.length > 0) {
         let newText = currentText.slice(0, -1);
-        calcNum.textContent = newText;
+        calcNumOne.textContent = newText;
     }
 }
