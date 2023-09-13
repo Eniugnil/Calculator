@@ -1,3 +1,14 @@
+let container = document.getElementById('calcScreen');
+
+let calcNumOne = document.createElement('div'); 
+container.appendChild(calcNumOne);
+
+let ope = document.createElement('div'); 
+container.appendChild(ope);
+
+let calcNumTwo = document.createElement('div'); 
+container.appendChild(calcNumTwo);
+
 function add(a, b) {
     return +a + +b;
 }
@@ -17,115 +28,69 @@ function divide(a, b) {
 let numberOne;
 let operator;
 let numberTwo;
-let answeree;
+let answer;
 
-//numberOne
-let containerOne = document.getElementById('calcScreen');
-let calcNumOne = document.createElement('div'); 
-containerOne.appendChild(calcNumOne);
-
-
-function addNumber(number) {
-    if (!numberOne) {
-        if (number === "+" || number === "-" || number === "*" || number === "/") {
-            operator = number;
-            ope.textContent = operator
-            numberOne = calcNumOne.textContent;
-            console.log(numberOne + " one");
-        }
+function input(number) {
+    if (number === "+" || number === "-" || number === "*" || number === "/") {
+        operator = number;
+        ope.textContent = operator;
+        numberOne = calcNumOne.textContent;
+        console.log(numberOne + " one");
     }
 
     const numericRegex = /^[0-9]+(\.[0-9]+)?$/;
-    if (numericRegex.test(number)|| number === ".") {
+    if (numericRegex.test(number) || number === ".") {
         if (!numberOne) {
             calcNumOne.textContent += number;
         }
     }
-    
+
     if (numberOne) {
-        if (numberOne.length >= 1 || numberOne === answeree) {
-            numTwo(number)
+        if (numberOne.length >= 1 || numberOne === answer) {
+            numTwo(number);
         }
     }
 }
 
-//operator (also remember to just combine all the containers from num1,ope,num2,ans)
-let containerOpe = document.getElementById('calcScreen');
-let ope = document.createElement('div'); 
-containerOpe.appendChild(ope);
-
-//numberTwo
-let containerTwo = document.getElementById('calcScreen');
-let calcNumTwo = document.createElement('div'); 
-containerTwo.appendChild(calcNumTwo);
 
 function numTwo(number) {
     if (number === "=") {
         numberTwo = calcNumTwo.textContent;
         if (operator === "+") {
-            answeree = add(numberOne, numberTwo);
-            numberOne = answeree;
-            calcNumOne.textContent = answeree;
-            numberTwo = "";
-            calcNumTwo.textContent = "";
+            answer = add(numberOne, numberTwo);
         } else if (operator === "-") {
-            answeree = subtract(numberOne, numberTwo);
-            numberOne = answeree;
-            calcNumOne.textContent = answeree;
-            numberTwo = "";
-            calcNumTwo.textContent = "";
-        } else if (operator === "*") {
-            answeree = multiply(numberOne, numberTwo);
-            numberOne = answeree;
-            calcNumOne.textContent = answeree;
-            numberTwo = "";
-            calcNumTwo.textContent = "";
-        } else if (operator === "/") {
-            answeree = divide(numberOne, numberTwo);
-            numberOne = answeree;
-            calcNumOne.textContent = answeree;
-            numberTwo = "";
-            calcNumTwo.textContent = "";
+            answer = subtract(numberOne, numberTwo);
+        } else if (operator === "*" && numberTwo.length >= 1) {
+            answer = multiply(numberOne, numberTwo);
+        } else if (operator === "/" && numberTwo.length >= 1) {
+            answer = divide(numberOne, numberTwo);
         }
+    
+        numberOne = answer;
+        calcNumOne.textContent = answer;
+        numberTwo = "";
+        calcNumTwo.textContent = "";
     }
+    
 
-    if (!numberTwo) {
-        if (number === "+" || number === "-" || number === "*" || number === "/" ) {
-            numberTwo = calcNumTwo.textContent;
-            if (operator === "+") {
-                answeree = add(numberOne, numberTwo);
-                numberOne = answeree;
-                calcNumOne.textContent = answeree;
-                numberTwo = "";
-                calcNumTwo.textContent = "";
-                operator = number;
-                ope.textContent = operator
-            } else if (operator === "-") {
-                answeree = subtract(numberOne, numberTwo);
-                numberOne = answeree;
-                calcNumOne.textContent = answeree;
-                numberTwo = "";
-                calcNumTwo.textContent = "";
-                operator = number;
-                ope.textContent = operator
-            } else if (operator === "*") {
-                answeree = multiply(numberOne, numberTwo);
-                numberOne = answeree;
-                calcNumOne.textContent = answeree;
-                numberTwo = "";
-                calcNumTwo.textContent = "";
-                operator = number;
-                ope.textContent = operator
-            } else if (operator === "/") {
-                answeree = divide(numberOne, numberTwo);
-                numberOne = answeree;
-                calcNumOne.textContent = answeree;
-                numberTwo = "";
-                calcNumTwo.textContent = "";
-                operator = number;
-                ope.textContent = operator
-            }
+    if (!numberTwo && (number === "+" || number === "-" || (number === "*" && numberTwo.length >= 1) || (number === "/" && numberTwo.length >= 1))) {
+        numberTwo = calcNumTwo.textContent;
+        if (operator === "+") {
+            answer = add(numberOne, numberTwo);
+        } else if (operator === "-") {
+            answer = subtract(numberOne, numberTwo);
+        } else if (operator === "*" && numberTwo.length >= 1) {
+            answer = multiply(numberOne, numberTwo);
+        } else if (operator === "/" && numberTwo.length >= 1) {
+            answer = divide(numberOne, numberTwo);
         }
+        
+        numberOne = answer;
+        calcNumOne.textContent = answer;
+        numberTwo = "";
+        calcNumTwo.textContent = "";
+        operator = number;
+        ope.textContent = operator;
     }
 
     const numericRegex = /^[0-9]+(\.[0-9]+)?$/;
@@ -137,15 +102,12 @@ function numTwo(number) {
 }
 
 function clearAll() {
-
-    //this is the text content and not the actual variable storing the information
     calcNumOne.textContent = "";
     ope.textContent = "";
     calcNumTwo.textContent = "";
 
-    //this is the actual variable storing the information for the calculator
     numberOne = "";
     operator = "";
     numberTwo = "";
-    answeree = "";
+    answer = "";
 }
