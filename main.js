@@ -111,3 +111,28 @@ function clearAll() {
     numberTwo = "";
     answer = "";
 }
+
+function deleteOne() {
+    let currentText2 = calcNumTwo.textContent;
+    let currentText1 = calcNumOne.textContent;
+    let currentOperator = ope.textContent;
+
+    
+    if (currentText2.length > 0) {
+        let newText = currentText2.slice(0, -1);
+        calcNumTwo.textContent = newText;
+        numberTwo = newText;
+    }
+
+    if (currentOperator.length > 0 && !currentText2.length > 0) {
+        let newText = currentOperator.slice(0, -1);
+        ope.textContent = newText;
+        operator = newText;
+    }
+
+    if (currentText1.length >= 0 && !currentText2.length > 0 && !currentOperator.length > 0) {
+        let newText = currentText1.slice(0, -1);
+        calcNumOne.textContent = newText;
+        numberOne = newText
+    }
+}
