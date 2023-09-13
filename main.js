@@ -19,23 +19,6 @@ let operator;
 let numberTwo;
 let answeree;
 
-function operate(num1, op, num2) {
-    let total;
-    if (op === "+") {
-        total = add(num1, num2)
-        return total
-    } else if (op === "-") {
-        total = subtract(num1, num2)
-        return total
-    } else if (op === "*") {
-        total = multiply(num1, num2)
-        return total
-    } else if (op === "/") {
-        total = divide(num1, num2)
-        return total
-    }
-}
-
 //numberOne
 let containerOne = document.getElementById('calcScreen');
 let calcNumOne = document.createElement('div'); 
@@ -77,6 +60,35 @@ let calcNumTwo = document.createElement('div');
 containerTwo.appendChild(calcNumTwo);
 
 function numTwo(number) {
+    if (number === "=") {
+        numberTwo = calcNumTwo.textContent;
+        if (operator === "+") {
+            answeree = add(numberOne, numberTwo);
+            numberOne = answeree;
+            calcNumOne.textContent = answeree;
+            numberTwo = "";
+            calcNumTwo.textContent = "";
+        } else if (operator === "-") {
+            answeree = subtract(numberOne, numberTwo);
+            numberOne = answeree;
+            calcNumOne.textContent = answeree;
+            numberTwo = "";
+            calcNumTwo.textContent = "";
+        } else if (operator === "*") {
+            answeree = multiply(numberOne, numberTwo);
+            numberOne = answeree;
+            calcNumOne.textContent = answeree;
+            numberTwo = "";
+            calcNumTwo.textContent = "";
+        } else if (operator === "/") {
+            answeree = divide(numberOne, numberTwo);
+            numberOne = answeree;
+            calcNumOne.textContent = answeree;
+            numberTwo = "";
+            calcNumTwo.textContent = "";
+        }
+    }
+
     if (!numberTwo) {
         if (number === "+" || number === "-" || number === "*" || number === "/" ) {
             numberTwo = calcNumTwo.textContent;
@@ -130,7 +142,6 @@ function clearAll() {
     calcNumOne.textContent = "";
     ope.textContent = "";
     calcNumTwo.textContent = "";
-    calcNumAns.textContent = "";
 
     //this is the actual variable storing the information for the calculator
     numberOne = "";
