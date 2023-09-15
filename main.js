@@ -21,8 +21,9 @@ function multiply(a, b) {
     return +a * +b;
 }
 
-function divide(a, b) {
-    return +a / +b;
+function divide(a, b) { 
+    let c = (+a / +b);
+    return c.toFixed(4);
 }
 
 let numberOne;
@@ -31,74 +32,55 @@ let numberTwo;
 let answer;
 
 function input(number) {
-    if (number === "+" || number === "-" || number === "*" || number === "/") {
-        operator = number;
-        ope.textContent = operator;
-        numberOne = calcNumOne.textContent;
-        console.log(numberOne + " one");
-    }
-
     const numericRegex = /^[0-9]+(\.[0-9]+)?$/;
+    
     if (numericRegex.test(number) || number === ".") {
-        if (!numberOne) {
+        if (!operator) {
+            // If there's no operator set, append to numberOne
             calcNumOne.textContent += number;
+        } else {
+            // If there's an operator, append to numberTwo
+            calcNumTwo.textContent += number;
         }
-    }
-
-    if (numberOne) {
-        if (numberOne.length >= 1 || numberOne === answer) {
-            numTwo(number);
+    } else if (number === "+" || number === "-" || number === "*" || number === "/") {
+        if (!operator) {
+            // If there's no operator set, set the operator
+            operator = number;
+            ope.textContent = operator;
+        } else {
+            // If there's an operator set, calculate the result
+            calculateResult();
+            operator = number;
+            ope.textContent = operator;
         }
+    } else if (number === "=") {
+        calculateResult();
     }
 }
 
+function calculateResult() {
+    const num1 = parseFloat(calcNumOne.textContent);
+    const num2 = parseFloat(calcNumTwo.textContent);
 
-function numTwo(number) {
-    if (number === "=") {
-        numberTwo = calcNumTwo.textContent;
-        if (operator === "+") {
-            answer = add(numberOne, numberTwo);
-        } else if (operator === "-") {
-            answer = subtract(numberOne, numberTwo);
-        } else if (operator === "*" && numberTwo.length >= 1) {
-            answer = multiply(numberOne, numberTwo);
-        } else if (operator === "/" && numberTwo.length >= 1) {
-            answer = divide(numberOne, numberTwo);
-        }
-    
-        numberOne = answer;
-        calcNumOne.textContent = answer;
-        numberTwo = "";
-        calcNumTwo.textContent = "";
-    }
-    
-
-    if (!numberTwo && (number === "+" || number === "-" || (number === "*" && numberTwo.length >= 1) || (number === "/" && numberTwo.length >= 1))) {
-        numberTwo = calcNumTwo.textContent;
-        if (operator === "+") {
-            answer = add(numberOne, numberTwo);
-        } else if (operator === "-") {
-            answer = subtract(numberOne, numberTwo);
-        } else if (operator === "*" && numberTwo.length >= 1) {
-            answer = multiply(numberOne, numberTwo);
-        } else if (operator === "/" && numberTwo.length >= 1) {
-            answer = divide(numberOne, numberTwo);
-        }
-        
-        numberOne = answer;
-        calcNumOne.textContent = answer;
-        numberTwo = "";
-        calcNumTwo.textContent = "";
-        operator = number;
-        ope.textContent = operator;
+    switch (operator) {
+        case "+":
+            answer = add(num1, num2);
+            break;
+        case "-":
+            answer = subtract(num1, num2);
+            break;
+        case "*":
+            answer = multiply(num1, num2);
+            break;
+        case "/":
+            answer = divide(num1, num2);
+            break;
     }
 
-    const numericRegex = /^[0-9]+(\.[0-9]+)?$/;
-    if (numericRegex.test(number)|| number === ".") {
-        if (!numberTwo || numberTwo === "") {
-            calcNumTwo.textContent += number;
-        }
-    }
+    numberOne = answer;
+    calcNumOne.textContent = answer;
+    numberTwo = "";
+    calcNumTwo.textContent = "";
 }
 
 function clearAll() {
